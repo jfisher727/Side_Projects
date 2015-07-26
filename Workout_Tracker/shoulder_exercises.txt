@@ -1,0 +1,15 @@
+
+Standing_Barbell_Press
+Seated_Barbell_Press
+Standing_Dumbbell_Press
+Seated_Dumbbell_Press
+Arnold_Press
+Standing_Front_Raises
+Seated_Front_Raises
+Standing_Lateral_Raises
+Seated_Lateral_Raises
+Cable_Lateral_Raises
+Laying_Rear_Delt_Fly
+Barbell_Upright_Row
+Leverage_Shrug
+Smith_Machine_Shrug

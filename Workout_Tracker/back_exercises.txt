@@ -1,0 +1,15 @@
+
+Pullups_Wide_Grip
+Pullups_Normal_Grip
+Chinups_Wide_Grip
+Chinups_Normal_Grip
+Lat_Pulldown
+Lat_Pulldown_Behind_Neck
+Lat_Pulldown_Underhand
+Single_Arm_Pulldown
+Dumbbell_Row
+Barbell_Row
+Flatbar_Push_Down
+Dumbbell_Pull_Over
+Hyperextensions
+Cable_Rows

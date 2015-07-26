@@ -1,0 +1,14 @@
+
+Barbell_Bench_Press
+Dumbbell_Bench_Press
+Barbell_Incline_Bench
+Dumbbell_Incline_Bench
+Barbell_Decline_Bench
+Dumbbell_Decline_Bench
+Pushups
+Dumbbell_Fly
+Dumbbell_Incline_Fly
+Dumbbell_Decline_Fly
+Cable_Fly
+Cable_Incline_Fly
+Cable_Decline_Fly

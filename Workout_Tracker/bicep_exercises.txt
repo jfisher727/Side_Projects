@@ -1,0 +1,11 @@
+
+EZ_Bar_Curls
+Hammer_Curls
+Alternating_Hammer_Curls
+Barbell_Curls
+Dumbbell_Curls
+Alternating_Dumbbell_Curls
+Concentration_Curls
+Barbell_Preacher_Curls
+EZ_Bar_Preacher_Curls
+Dumbbell_Preacher_Curls

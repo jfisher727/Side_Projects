@@ -1,0 +1,15 @@
+
+Back_Squat
+Front_Squat
+Hack_Squat
+Leg_Press
+Leg_Curls
+Single_Leg_Curls
+Laying_Leg_Curls
+Single_Laying_Curls
+Leg_Extensions
+Single_Leg_Extensions
+Seated_Calf_Raises
+Calf_Raises_Leg_Press
+Walking_Lunges
+Weighted_Step_Ups
