@@ -1,4 +1,5 @@
 import cv2
+import sys
 
 def diffImage (t0, t1, t2):
 	d1 = cv2.absdiff(t2, t1)
@@ -8,7 +9,7 @@ def diffImage (t0, t1, t2):
 camera = cv2.VideoCapture(0)
 
 window_name = "Tester"
-cv2.namedWindow (window_name, cv2.CV_WINDOW_AUTOSIZE)
+cv2.namedWindow (window_name, cv2.WINDOW_AUTOSIZE)
 
 t_minus = cv2.cvtColor(camera.read()[1], cv2.COLOR_RGB2GRAY)
 t = cv2.cvtColor(camera.read()[1], cv2.COLOR_RGB2GRAY)
@@ -16,12 +17,15 @@ t_plus = cv2.cvtColor(camera.read()[1], cv2.COLOR_RGB2GRAY)
 
 while True:
 	#cv2.imshow (window_name, image)
-	cv2.imshow (window_name, diffImage(t_minus, t, t_plus))
+	diff_image = diffImage(t_minus, t, t_plus)
+	cv2.imshow (window_name, diff_image)
 	#s, image = camera.read()
 
 	t_minus = t
 	t = t_plus
 	t_plus = cv2.cvtColor(camera.read()[1], cv2.COLOR_RGB2GRAY)
+
+	sys.stdout.write ( diff_image.toString() )
 
 	key = cv2.waitKey(10)
 	if key == 27:
