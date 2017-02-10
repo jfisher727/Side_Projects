@@ -1,0 +1,12 @@
+{% extends 'FantasyFootball/navigation.html' %}
+{% block 'body' %}
+
+<form action="/fantasyfootball/player_stats_request/" method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

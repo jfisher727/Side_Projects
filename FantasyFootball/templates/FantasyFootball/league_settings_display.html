@@ -1,0 +1,29 @@
+{% extends 'FantasyFootball/navigation.html' %}
+{% block 'body' %}
+    {% if league_settings %}
+        League Name: {{ league_settings.name }}
+        <table>
+            <tr><th>Attribute</th><th>Value</th></tr>
+            <tr><td>Roster Size</td><td>{{ league_settings.roster_size }}</td></tr>
+            <tr><td># Starters</td><td>{{ league_settings.number_starters }}</td></tr>
+            <tr><td># Bench</td><td>{{ league_settings.number_bench }}</td></tr>
+            <tr class='line'></tr>
+            <tr><td>Every 25 Passing Yards (PY25)</td><td>{{ league_settings.passing_points_py25 }}</td></tr>
+            <tr><td>Interceptions Thrown</td><td>{{ league_settings.passing_interception }}</td></tr>
+            <tr><td>TD Pass</td><td>{{ league_settings.passing_td }}</td></tr>
+            <tr><td>2pt Passing Completion</td><td>{{ league_settings.passing_2pt_conversion }}</td></tr>
+            <tr class='line'></tr>
+            <tr><td>Rushing Yards</td><td>{{ league_settings.rushing_yards }}</td></tr>
+            <tr><td>TD Rush</td><td>{{ league_settings.rushing_td }}</td></tr>
+            <tr><td>2pt Rushing Conversion</td><td>{{ league_settings.rushing_2pt_conversion }}</td></tr>
+            <tr></tr>
+            <tr><td>Field Goal Made</td><td>{{ league_settings.field_goal_made }}</td></tr>
+            <tr><td>Field Goal Missed</td><td>{{ league_settings.field_goal_missed }}</td></tr>
+            <tr><td>Extra Point Made</td><td>{{ league_settings.extra_point_made }}</td></tr>
+            <tr><td>Extra Point Missed</td><td> {{ league_settings.extra_point_missed }}</td></tr>
+            <tr></tr>
+            <tr><td>Sacks</td><td>{{ league_settings.sacks }}</td></tr>
+            <tr><td>Defensive TD</td><td>{{ league_settings.defensive_td }}</td></tr>
+        </table>
+    {% endif %}
+{% endblock %}

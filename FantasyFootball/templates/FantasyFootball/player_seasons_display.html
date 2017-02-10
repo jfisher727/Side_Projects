@@ -1,0 +1,152 @@
+{% extends 'FantasyFootball/navigation.html' %}
+{% block 'body' %}
+{% load dictionary_extras %}
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class='alert alert-danger'>
+                <strong>{{ error|escape }} </strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class='alert alert-danger'>
+            <strong> {{ error|escape }} </strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if player and seasons and season_stats %}
+
+    <table>
+        <tr><td style="align:left">Player Name: {{ player.name }}</td></tr>
+        <tr><td>Position: {{ player.position }}</td></tr>
+    </table>
+    </br>
+
+    <table>
+    {% if player.position == 'QB' %}
+        <tr><th>Season</th><th>Team</th><th>Completions</th><th>Attempts</th><th>Passing Yards</th><th>TD</th><th>INT</th><th>Rushing Attempts</th><th>Rushing Yards</th><th>Rushing TD</th></tr>
+        {% for current_season in seasons %}
+            {% with season_number=current_season.season|stringformat:'i' %}
+            {% with this_season_stats=season_stats|access:season_number %}
+            <tr>
+                <td><a href="{% url 'fantasyfootball:season_details' player.id current_season.id %}"> {{ current_season.season }} </a></td>
+                <td>{{ current_season.team }}</td>
+                <td>{{ this_season_stats.passing_completions }}</td>
+                <td>{{ this_season_stats.passing_attempts }}</td>
+                <td>{{ this_season_stats.passing_yards }}</td>
+                <td>{{ this_season_stats.passing_td }}</td>
+                <td>{{ this_season_stats.passing_int }}</td>
+                <td>{{ this_season_stats.rushing_attempts }}</td>
+                <td>{{ this_season_stats.rushing_yards }}</td>
+                <td>{{ this_season_stats.rushing_td }}</td>
+            </tr>
+            {% endwith %}
+            {% endwith %}
+        {% endfor %}
+    {% endif %}
+    {% if player.position == 'RB' %}
+        <tr><th>Season</th><th>Team</th><th>Rushing Attempts</th><th>Rushing Yards</th><th>Rushing TD</th><th>Targets</th><th>Receptions</th><th>Receiving Yards</th><th>Receiving TD</th></tr>
+        {% for current_season in seasons %}
+            {% with season_number=current_season.season|stringformat:'i' %}
+            {% with this_season_stats=season_stats|access:season_number %}
+            <tr>
+                <td><a href="{% url 'fantasyfootball:season_details' player.id current_season.id %}"> {{ current_season.season }} </a></td>
+                <td>{{ current_season.team }}</td>
+                <td>{{ this_season_stats.rushing_attempts }}</td>
+                <td>{{ this_season_stats.rushing_yards }}</td>
+                <td>{{ this_season_stats.rushing_td }}</td>
+                <td>{{ this_season_stats.receiving_targets }}</td>
+                <td>{{ this_season_stats.receiving_receptions }}</td>
+                <td>{{ this_season_stats.receiving_yards }}</td>
+                <td>{{ this_season_stats.receiving_td }}</td>
+            </tr>
+            {% endwith %}
+            {% endwith %}
+        {% endfor %}
+    {% endif %}
+    {% if player.position == 'WR' %}
+        <tr><th>Season</th><th>Team</th><th>Targets</th><th>Receptions</th><th>Receiving Yards</th><th>Receiving TD</th><th>Rushing Attempts</th><th>Rushing Yards</th><th>Rushing TD</th></tr>
+        {% for current_season in seasons %}
+            {% with season_number=current_season.season|stringformat:'i' %}
+            {% with this_season_stats=season_stats|access:season_number %}
+            <tr>
+                <td><a href="{% url 'fantasyfootball:season_details' player.id current_season.id %}"> {{ current_season.season }} </a></td>
+                <td>{{ current_season.team }}</td>
+                <td>{{ this_season_stats.receiving_targets }}</td>
+                <td>{{ this_season_stats.receiving_receptions }}</td>
+                <td>{{ this_season_stats.receiving_yards }}</td>
+                <td>{{ this_season_stats.receiving_td }}</td>
+                <td>{{ this_season_stats.rushing_attempts }}</td>
+                <td>{{ this_season_stats.rushing_yards }}</td>
+                <td>{{ this_season_stats.rushing_td }}</td>
+            </tr>
+            {% endwith %}
+            {% endwith %}
+        {% endfor %}
+    {% endif %}
+    {% if player.position == 'TE' %}
+        <tr><th>Season</th><th>Team</th><th>Targets</th><th>Receptions</th><th>Receiving Yards</th><th>Receiving TD</th></tr>
+        {% for current_season in seasons %}
+            {% with season_number=current_season.season|stringformat:'i' %}
+            {% with this_season_stats=season_stats|access:season_number %}
+            <tr>
+                <td><a href="{% url 'fantasyfootball:season_details' player.id current_season.id %}"> {{ current_season.season }} </a></td>
+                <td>{{ current_season.team }}</td>
+                <td>{{ this_season_stats.receiving_targets }}</td>
+                <td>{{ this_season_stats.receiving_receptions }}</td>
+                <td>{{ this_season_stats.receiving_yards }}</td>
+                <td>{{ this_season_stats.receiving_td }}</td>
+            </tr>
+            {% endwith %}
+            {% endwith %}
+        {% endfor %}
+    {% endif %}
+    {% if player.position == 'K' %}
+        <tr><th>Season</th><th>Team</th><th>Field Goals Made</th><th>Field Goals Attempted</th><th>Extra Points Made</th><th>Extra Points Attempted</th></tr>
+        {% for current_season in seasons %}
+            {% with season_number=current_season.season|stringformat:'i' %}
+            {% with this_season_stats=season_stats|access:season_number %}
+            <tr>
+                <td><a href="{% url 'fantasyfootball:season_details' player.id current_season.id %}"> {{ current_season.season }} </a></td>
+                <td>{{ current_season.team }}</td>
+                <td>{{ this_season_stats.field_goal_made }}</td>
+                <td>{{ this_season_stats.field_goal_attempts }}</td>
+                <td>{{ this_season_stats.extra_point_made }}</td>
+                <td>{{ this_season_stats.extra_point_attempts }}</td>
+            </tr>
+            {% endwith %}
+            {% endwith %}
+        {% endfor %}
+    {% endif %}
+    {% if player.position == 'DEF' %}
+        <tr><th>Season</th><th>Team</th><th>Sacks</th><th>Fumbles Recovered</th><th>Interceptions</th><th> Defensive TD</th><th>Points Against</th><th>Passing Yards Against</th><th>Rushing Yards Against</th><th>Safety</th><th>Kick Return TD</th></tr>
+        {% for current_season in seasons %}
+            {% with season_number=current_season.season|stringformat:'i' %}
+            {% with this_season_stats=season_stats|access:season_number %}
+            <tr>
+                <td><a href="{% url 'fantasyfootball:season_details' player.id current_season.id %}"> {{ current_season.season }} </a></td>
+                <td>{{ current_season.team }}</td>
+                <td>{{ this_season_stats.sacks }}</td>
+                <td>{{ this_season_stats.fumble_recovery }}</td>
+                <td>{{ this_season_stats.interceptions }}</td>
+                <td>{{ this_season_stats.defensive_td }}</td>
+                <td>{{ this_season_stats.points_against }}</td>
+                <td>{{ this_season_stats.passing_yards_against }}</td>
+                <td>{{ this_season_stats.rushing_yards_against }}</td>
+                <td>{{ this_season_stats.safety }}</td>
+                <td>{{ this_season_stats.kick_return_td }}</td>
+            </tr>
+            {% endwith %}
+            {% endwith %}
+        {% endfor %}
+    {% endif %}
+    </table>
+
+{% else %}
+    <p> No applicable entries in the database </p>
+
+{% endif %}
+{% endblock %}

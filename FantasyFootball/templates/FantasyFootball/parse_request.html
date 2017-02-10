@@ -1,0 +1,10 @@
+{% extends 'FantasyFootball/navigation.html' %}
+{% block 'body' %}
+
+<form action="/fantasyfootball/parse_request/" method="post">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

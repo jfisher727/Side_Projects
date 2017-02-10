@@ -1,0 +1,35 @@
+{% extends 'FantasyFootball/navigation.html' %}
+{% block 'body' %}
+{% load dictionary_extras %}
+
+    {% if weekly_matchups %}
+        {% with season_keys=weekly_matchups|keys %}
+        {% for key in season_keys %}
+            {% with matchups=weekly_matchups|access:key %}
+            {% with first_matchup=matchups|entry:0 %}
+                <h3> Week {{ first_matchup.week }} of the {{ first_matchup.season }} Season </h3>
+                <table>
+                    <tr>
+                        {% for matchup in matchups %}
+                            <td>
+                                <table>
+                                    <tr><th>Team</th><th>Score</th></tr>
+                                    <tr><td>{{ matchup.away_team }}</td><td>{{ matchup.away_score }}</td></tr>
+                                    <tr><td>{{ matchup.home_team }}</td><td>{{ matchup.home_score }}</td></tr>
+                                </table>
+                                <a href="{% url 'fantasyfootball:matchup_boxscore' matchup.id %}">Box Score</a>
+                            </td>
+                            {% if forloop.counter|divisibleby:4 %}
+                                </tr>
+                                <tr>
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                    </tr>
+                </table>
+            {% endwith %}
+            {% endwith %}
+        {% endfor %}
+        {% endwith %}
+    {% endif %}
+{% endblock %}

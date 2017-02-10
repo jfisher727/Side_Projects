@@ -1,0 +1,11 @@
+{% extends 'FantasyFootball/navigation.html' %}
+{% block 'body' %}
+
+    {% if seasons %}
+        <table>
+            {% for season in seasons %}
+                <tr><td><a href="{% url 'fantasyfootball:season_matchups' season %}">{{ season }}</a></td></tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

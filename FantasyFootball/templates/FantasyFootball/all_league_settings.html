@@ -1,0 +1,13 @@
+{% extends 'FantasyFootball/navigation.html' %}
+{% block 'body' %}
+    {% if league_settings %}
+        <table>
+            <tr><th>League Name</th></tr>
+            {% for settings in league_settings %}
+                <tr><td><a href="{% url 'fantasyfootball:league_settings_display' settings.id %}">{{ settings.name }}</a></td></tr>
+            {% endfor %}
+        </table>
+
+        <a href="{% url 'fantasyfootball:league_settings_request' %}"> Add New League</a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'FantasyFootball/navigation.html' %}
+{% block 'body' %}
+{% load dictionary_extras %}
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class='alert alert-danger'>
+                <strong>{{ error|escape }} </strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class='alert alert-danger'>
+            <strong> {{ error|escape }} </strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if player_predictions and applicable_players %}
+
+    <table>
+        {% for player in applicable_players %}
+            {% with counter=forloop.counter0 %}
+            {% with prediction=player_predictions|entry:counter %}
+            {% if player.position == 'QB' %}
+                <tr><th>Player Name</th><th>Position</th><th>Completions</th><th>Attempts</th><th>Passing Yards</th><th>TD</th><th>INT</th><th>Rushing Attempts</th><th>Rushing Yards</th><th>Rushing TD</th><th>Fantasy Points</th></tr>
+                    <tr>
+                        <td><a href="{% url 'fantasyfootball:player_details' player.id %}"> {{ player.name }} </a></td>
+                        <td> {{ player.position }} </td>
+                        <td>{{ prediction.passing_completions }}</td>
+                        <td>{{ prediction.passing_attempts }}</td>
+                        <td>{{ prediction.passing_yards }}</td>
+                        <td>{{ prediction.passing_td }}</td>
+                        <td>{{ prediction.passing_int }}</td>
+                        <td>{{ prediction.rushing_attempts }}</td>
+                        <td>{{ prediction.rushing_yards }}</td>
+                        <td>{{ prediction.rushing_td }}</td>
+                        <td>{{ prediction.fantasy_points }}</td>
+                    </tr>
+            {% endif %}
+            {% if player.position == 'RB' %}
+                <tr><th>Player Name</th><th>Position</th><th>Rushing Attempts</th><th>Rushing Yards</th><th>Rushing TD</th><th>Targets</th><th>Receptions</th><th>Receiving Yards</th><th>Receiving TD</th><th>Fantasy Points</th></tr>
+                    <tr>
+                        <td><a href="{% url 'fantasyfootball:player_details' player.id %}"> {{ player.name }} </a></td>
+                        <td>{{ player.position }}</td>
+                        <td>{{ prediction.rushing_attempts }}</td>
+                        <td>{{ prediction.rushing_yards }}</td>
+                        <td>{{ prediction.rushing_td }}</td>
+                        <td>{{ prediction.receiving_targets }}</td>
+                        <td>{{ prediction.receiving_receptions }}</td>
+                        <td>{{ prediction.receiving_yards }}</td>
+                        <td>{{ prediction.receiving_td }}</td>
+                        <td>{{ prediction.fantasy_points }}</td>
+                    </tr>
+            {% endif %}
+            {% if player.position == 'WR' %}
+                <tr><th>Player Name</th><th>Position</th><th>Targets</th><th>Receptions</th><th>Receiving Yards</th><th>Receiving TD</th><th>Rushing Attempts</th><th>Rushing Yards</th><th>Rushing TD</th><th>Fantasy Points</th></tr>
+                    <tr>
+                        <td><a href="{% url 'fantasyfootball:player_details' player.id %}"> {{ player.name }} </a></td>
+                        <td>{{ player.position }}</td>
+                        <td>{{ prediction.receiving_targets }}</td>
+                        <td>{{ prediction.receiving_receptions }}</td>
+                        <td>{{ prediction.receiving_yards }}</td>
+                        <td>{{ prediction.receiving_td }}</td>
+                        <td>{{ prediction.rushing_attempts }}</td>
+                        <td>{{ prediction.rushing_yards }}</td>
+                        <td>{{ prediction.rushing_td }}</td>
+                        <td>{{ prediction.fantasy_points }}</td>
+                    </tr>
+            {% endif %}
+            {% if player.position == 'TE' %}
+                <tr><th>Player Name</th><th>Position</th><th>Targets</th><th>Receptions</th><th>Receiving Yards</th><th>Receiving TD</th><th>Fantasy Points</th></tr>
+                    <tr>
+                        <td><a href="{% url 'fantasyfootball:player_details' player.id %}"> {{ player.name }} </a></td>
+                        <td>{{ player.position }}</td>
+                        <td>{{ prediction.receiving_targets }}</td>
+                        <td>{{ prediction.receiving_receptions }}</td>
+                        <td>{{ prediction.receiving_yards }}</td>
+                        <td>{{ prediction.receiving_td }}</td>
+                        <td>{{ prediction.fantasy_points }}</td>
+                    </tr>
+            {% endif %}
+            {% if player.position == 'K' %}
+                <tr><th>Player Name</th><th>Position</th><th>Field Goals Made</th><th>Field Goals Attempted</th><th>Extra Points Made</th><th>Extra Points Attempted</th><th>Fantasy Points</th></tr>
+                    <tr>
+                        <td><a href="{% url 'fantasyfootball:player_details' player.id %}"> {{ player.name }} </a></td>
+                        <td>{{ player.position }}</td>
+                        <td>{{ prediction.field_goal_made }}</td>
+                        <td>{{ prediction.field_goal_attempts }}</td>
+                        <td>{{ prediction.extra_point_made }}</td>
+                        <td>{{ prediction.extra_point_attempts }}</td>
+                        <td>{{ prediction.fantasy_points }}</td>
+                    </tr>
+            {% endif %}
+            {% if player.position == 'DEF' %}
+                <tr><th>Team Name</th><th>Sacks</th><th>Fumbles Recovered</th><th>Interceptions</th><th> Defensive TD</th><th>Points Against</th><th>Passing Yards Against</th><th>Rushing Yards Against</th><th>Safety</th><th>Kick Return TD</th></tr>
+                    <tr>
+                        <td><a href="{% url 'fantasyfootball:player_details' player.id %}"> {{ player.name }} </a></td>
+                        <td>{{ prediction.sacks }}</td>
+                        <td>{{ prediction.fumble_recovery }}</td>
+                        <td>{{ prediction.interceptions }}</td>
+                        <td>{{ prediction.defensive_td }}</td>
+                        <td>{{ prediction.points_against }}</td>
+                        <td>{{ prediction.passing_yards_against }}</td>
+                        <td>{{ prediction.rushing_yards_against }}</td>
+                        <td>{{ prediction.safety }}</td>
+                        <td>{{ prediction.kick_return_td }}</td>
+                        <td>{{ prediction.fantasy_points }}</td>
+                    </tr>
+            {% endif %}
+            {% endwith %}
+            {% endwith %}
+        {% endfor %}
+    </table>
+
+{% else %}
+    <p> No predictions could be made based on the fields selected in the form. </p>
+
+{% endif %}
+{% endblock %}

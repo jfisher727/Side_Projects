@@ -1,0 +1,30 @@
+<header>
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'FantasyFootball/style.css' %}" />
+    <ul>
+        <li>
+            <a href="{% url 'fantasyfootball:index' %}"> Home </a>
+        </li>
+        <li>
+            <a href="{% url 'fantasyfootball:player_stats' %}"> Player Stats </a>
+        </li>
+        <li>
+            <a href="{% url 'fantasyfootball:player_predictions' %}"> Player Predictions </a>
+        </li>
+        <li>
+            <a href="{% url 'fantasyfootball:update_entries' %}"> Update Players </a>
+        </li>
+        <li>
+            <a href="{% url 'fantasyfootball:all_league_settings' %}"> League Settings </a>
+        </li>
+        <li style="float:right">
+            <a href="{% url 'admin:index' %}"> Admin </a>
+        </li>
+    </ul>
+</header>
+<body>
+    </br>
+    {% block 'body' %}
+    {% endblock %}
+</body>

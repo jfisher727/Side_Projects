@@ -1,0 +1,132 @@
+{% extends 'FantasyFootball/navigation.html' %}
+{% block 'body' %}
+
+{% if player and season and weekly_stats %}
+    
+    {% if form %}
+        <form action="{% url 'fantasyfootball:season_details' player.id season.id %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit" />
+        </form>
+    {% endif %}
+
+    <table>
+        <tr><td>Player Name: {{ player.name }}</td></tr>
+        <tr><td style="align:left">Position: {{ player.position }}</td></tr>
+        <tr><td>Season: {{ season.season }}</td></tr>
+        <tr><td>Team: {{ season.team }}</td></tr>
+    </table>
+    </br>
+
+    <table>
+    {% if player.position == 'QB' %}
+        <tr><th>Week</th><th>Opponent</th><th>Result</th><th>Completions</th><th>Attempts</th><th>Passing Yards</th><th>TD</th><th>INT</th><th>Rushing Attempts</th><th>Rushing Yards</th><th>Rushing TD</th><th>Fantasy Points</th></tr>
+        {% for week in weekly_stats %}
+            <tr>
+                <td>{{ week.week }}</td>
+                <td>{{ week.opponent }}</td>
+                <td>{{ week.result }}</td> 
+                <td>{{ week.passing_completions }}</td>
+                <td>{{ week.passing_attempts }}</td>
+                <td>{{ week.passing_yards }}</td>
+                <td>{{ week.passing_td }}</td>
+                <td>{{ week.passing_int }}</td>
+                <td>{{ week.rushing_attempts }}</td>
+                <td>{{ week.rushing_yards }}</td>
+                <td>{{ week.rushing_td }}</td>
+                <td>{{ week.fantasy_points }}</td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+    {% if player.position == 'RB' %}
+        <tr><th>Week</th><th>Opponent</th><th>Result</th><th>Rushing Attempts</th><th>Rushing Yards</th><th>Rushing TD</th><th>Targets</th><th>Receptions</th><th>Receiving Yards</th><th>Receiving TD</th><th>Fantasy Points</th></tr>
+        {% for week in weekly_stats %}
+            <tr>
+                <td>{{ week.week }}</td>
+                <td>{{ week.opponent }}</td>
+                <td>{{ week.result }}</td> 
+                <td>{{ week.rushing_attempts }}</td>
+                <td>{{ week.rushing_yards }}</td>
+                <td>{{ week.rushing_td }}</td>
+                <td>{{ week.receiving_targets }}</td>
+                <td>{{ week.receiving_receptions }}</td>
+                <td>{{ week.receiving_yards }}</td>
+                <td>{{ week.receiving_td }}</td>
+                <td>{{ week.fantasy_points }}</td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+    {% if player.position == 'WR' %}
+        <tr><th>Week</th><th>Opponent</th><th>Result</th><th>Targets</th><th>Receptions</th><th>Receiving Yards</th><th>Receiving TD</th><th>Rushing Attempts</th><th>Rushing Yards</th><th>Rushing TD</th><th>Fantasy Points</th></tr>
+        {% for week in weekly_stats %}
+            <tr>
+                <td>{{ week.week }}</td>
+                <td>{{ week.opponent }}</td>
+                <td>{{ week.result }}</td> 
+                <td>{{ week.receiving_targets }}</td>
+                <td>{{ week.receiving_receptions }}</td>
+                <td>{{ week.receiving_yards }}</td>
+                <td>{{ week.receiving_td }}</td>
+                <td>{{ week.rushing_attempts }}</td>
+                <td>{{ week.rushing_yards }}</td>
+                <td>{{ week.rushing_td }}</td>
+                <td>{{ week.fantasy_points }}</td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+    {% if player.position == 'TE' %}
+        <tr><th>Week</th><th>Opponent</th><th>Result</th><th>Targets</th><th>Receptions</th><th>Receiving Yards</th><th>Receiving TD</th><th>Fantasy Points</th></tr>
+        {% for week in weekly_stats %}
+            <tr>
+                <td>{{ week.week }}</td>
+                <td>{{ week.opponent }}</td>
+                <td>{{ week.result }}</td> 
+                <td>{{ week.receiving_targets }}</td>
+                <td>{{ week.receiving_receptions }}</td>
+                <td>{{ week.receiving_yards }}</td>
+                <td>{{ week.receiving_td }}</td>
+                <td>{{ week.fantasy_points }}</td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+    {% if player.position == 'K' %}
+        <tr><th>Week</th><th>Opponent</th><th>Result</th><th>Field Goals Made</th><th>Field Goals Attempted</th><th>Extra Points Made</th><th>Extra Points Attempted</th><th>Fantasy Points</th></tr>
+        {% for week in weekly_stats %}
+            <tr>
+                <td>{{ week.week }}</td>
+                <td>{{ week.opponent }}</td>
+                <td>{{ week.result }}</td> 
+                <td>{{ week.field_goal_made }}</td>
+                <td>{{ week.field_goal_attempts }}</td>
+                <td>{{ week.extra_point_made }}</td>
+                <td>{{ week.extra_point_attempts }}</td>
+                <td>{{ week.fantasy_points }}</td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+    {% if player.position == 'DEF' %}
+        <tr><th>Week</th><th>Opponent</th><th>Result</th><th>Sacks</th><th>Fumbles Recovered</th><th>Interceptions</th><th> Defensive TD</th><th>Points Against</th><th>Passing Yards Against</th><th>Rushing Yards Against</th><th>Safety</th><th>Kick Return TD</th><th>Fantasy Points</th></tr>
+        {% for week in weekly_stats %}
+            <tr>
+                <td>{{ week.week }}</td>
+                <td>{{ week.opponent }}</td>
+                <td>{{ week.result }}</td> 
+                <td>{{ week.sacks }}</td>
+                <td>{{ week.fumble_recovery }}</td>
+                <td>{{ week.interceptions }}</td>
+                <td>{{ week.defensive_td }}</td>
+                <td>{{ week.points_against }}</td>
+                <td>{{ week.passing_yards_against }}</td>
+                <td>{{ week.rushing_yards_against }}</td>
+                <td>{{ week.safety }}</td>
+                <td>{{ week.kick_return_td }}</td>
+                <td>{{ week.fantasy_points }}</td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+    </table>
+{% else %}
+    <p> No applicable entries in the database </p>
+{% endif %}
+{% endblock %}
